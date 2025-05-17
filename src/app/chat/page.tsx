@@ -212,7 +212,7 @@ export default function ChatPage() {
       <Alert variant="default" className="m-2 rounded-lg border-accent bg-accent/10">
         <Info className="h-5 w-5 text-accent" />
         <AlertTitle className="font-semibold text-accent">안내</AlertTitle>
-        <AlertDescription className="text-accent/90">
+        <AlertDescription className="text-accent-foreground break-words">
           AI가 아이의 연령, 관심사, 독서 수준에 맞는 책을 추천해 드립니다. 대화를 시작해보세요!
         </AlertDescription>
       </Alert>
