@@ -14,7 +14,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const AUTH_TOKEN_KEY = 'readme_kids_auth_token';
+const AUTH_TOKEN_KEY = '아이북_auth_token';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -77,3 +77,4 @@ export function useAuth() {
   }
   return context;
 }
+

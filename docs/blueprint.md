@@ -1,4 +1,4 @@
-# **App Name**: ReadMe Kids
+# **App Name**: 아이북
 
 ## Core Features:
 
