@@ -2,6 +2,7 @@
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
+  output: 'export',
   /* config options here */
   typescript: {
     ignoreBuildErrors: true,
@@ -21,7 +22,7 @@ const nextConfig: NextConfig = {
   },
   env: {
     NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME || "아이북",
-    // GOOGLE_API_KEY is used server-side by Genkit, no need to expose it to client
+    GEMINI_API_KEY: process.env.GEMINI_API_KEY,
   },
 };
 
