@@ -36,7 +36,7 @@ body {
     --destructive-foreground: 0 0% 98%;
     
     --ring: 207 90% 68%; /* Primary color for rings */
-    --radius: 0.5rem;
+    --radius: 0.85rem; /* Increased for rounder elements */
 
     /* ShadCN Sidebar variables - kept for completeness, adjust if sidebar is used */
     --sidebar-background: 207 100% 98%;

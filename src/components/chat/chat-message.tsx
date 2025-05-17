@@ -22,10 +22,10 @@ const BookRecommendationCard = ({ recommendation }: { recommendation: RecommendB
   <Card className="mt-2 shadow-md bg-card border-primary/50">
     <CardHeader>
       <div className="flex items-center space-x-3">
-        <BookOpen className="h-8 w-8 text-primary" />
+        <BookOpen className="h-10 w-10 text-primary" />
         <div>
-          <CardTitle className="text-xl text-primary">{recommendation.bookTitle}</CardTitle>
-          <CardDescription className="text-sm text-muted-foreground">작가: {recommendation.author}</CardDescription>
+          <CardTitle className="text-2xl text-primary">{recommendation.bookTitle}</CardTitle>
+          <CardDescription className="text-base text-muted-foreground">작가: {recommendation.author}</CardDescription>
         </div>
       </div>
     </CardHeader>
@@ -38,9 +38,9 @@ const BookRecommendationCard = ({ recommendation }: { recommendation: RecommendB
         className="rounded-md w-full object-cover aspect-[3/2] mb-3"
         data-ai-hint="book cover"
       />
-      <p className="text-sm text-foreground leading-relaxed">{recommendation.reason}</p>
+      <p className="text-base text-foreground leading-relaxed">{recommendation.reason}</p>
     </CardContent>
-    <CardFooter className="text-xs text-muted-foreground">
+    <CardFooter className="text-sm text-muted-foreground">
       AI 추천 도서입니다.
     </CardFooter>
   </Card>
@@ -74,30 +74,30 @@ export function ChatMessage({ message }: ChatMessageProps) {
         )}
       >
         {isBot && (
-          <div className="flex-shrink-0 h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center mr-2 mb-1 shadow-sm">
-            <Bot size={18} />
+          <div className="flex-shrink-0 h-10 w-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center mr-2 mb-1 shadow-sm">
+            <Bot size={22} />
           </div>
         )}
          {isUser && (
-          <div className="flex-shrink-0 h-8 w-8 rounded-full bg-accent text-accent-foreground flex items-center justify-center ml-2 mb-1 shadow-sm">
-            <User size={18} />
+          <div className="flex-shrink-0 h-10 w-10 rounded-full bg-accent text-accent-foreground flex items-center justify-center ml-2 mb-1 shadow-sm">
+            <User size={22} />
           </div>
         )}
         <div
           className={cn(
-            'p-3 rounded-xl shadow-md',
+            'p-4 rounded-xl shadow-md', // Increased padding
             isUser ? 'bg-primary text-primary-foreground rounded-br-none' : 'bg-card text-card-foreground rounded-bl-none border',
             message.isLoading ? 'italic text-muted-foreground' : ''
           )}
         >
           {message.isLoading ? (
-            <div className="flex items-center space-x-2">
-              <Sparkles className="h-4 w-4 animate-spin" />
+            <div className="flex items-center space-x-2 text-base">
+              <Sparkles className="h-5 w-5 animate-spin" />
               <span>답변을 생각하고 있어요...</span>
             </div>
           ) : (
             <>
-              {message.text && <p className="whitespace-pre-wrap">{message.text}</p>}
+              {message.text && <p className="whitespace-pre-wrap text-base">{message.text}</p>}
               {message.recommendation && <BookRecommendationCard recommendation={message.recommendation} />}
             </>
           )}
@@ -116,4 +116,3 @@ export function ChatMessage({ message }: ChatMessageProps) {
     </div>
   );
 }
-

@@ -198,21 +198,21 @@ export default function ChatPage() {
     <div className="flex flex-col h-screen bg-background max-w-lg mx-auto border-x border-border/50 shadow-lg">
       <header className="flex items-center justify-between p-3 border-b bg-card shadow-sm">
         <Button variant="ghost" size="icon" onClick={() => router.push('/login')} className="md:hidden">
-           <ArrowLeft className="h-6 w-6 text-muted-foreground" />
+           <ArrowLeft className="h-7 w-7 text-muted-foreground" />
         </Button>
         <div className="flex items-center space-x-2">
-          <BookHeart className="h-8 w-8 text-primary" />
-          <h1 className="text-xl font-semibold text-primary">{process.env.NEXT_PUBLIC_APP_NAME || "아이북"}</h1>
+          <BookHeart className="h-10 w-10 text-primary" />
+          <h1 className="text-2xl font-semibold text-primary">{process.env.NEXT_PUBLIC_APP_NAME || "아이북"}</h1>
         </div>
         <Button variant="ghost" size="icon" onClick={logout} title="로그아웃">
-          <LogOut className="h-5 w-5 text-muted-foreground" />
+          <LogOut className="h-6 w-6 text-muted-foreground" />
         </Button>
       </header>
 
       <Alert variant="default" className="m-2 rounded-lg border-accent bg-accent/10">
-        <Info className="h-5 w-5 text-accent" />
-        <AlertTitle className="font-semibold text-accent">안내</AlertTitle>
-        <AlertDescription className="text-accent-foreground break-words">
+        <Info className="h-6 w-6 text-accent" />
+        <AlertTitle className="font-semibold text-accent text-lg">안내</AlertTitle>
+        <AlertDescription className="text-accent-foreground break-words text-base">
           AI가 아이의 연령, 관심사, 독서 수준에 맞는 책을 추천해 드립니다. 대화를 시작해보세요!
         </AlertDescription>
       </Alert>
@@ -234,14 +234,14 @@ export default function ChatPage() {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
             disabled={isSending || currentStep === 'submitting'}
-            className="flex-grow h-12 text-base focus-visible:ring-1 focus-visible:ring-primary"
+            className="flex-grow text-base focus-visible:ring-1 focus-visible:ring-primary"
             aria-label="채팅 메시지 입력"
           />
-          <Button onClick={handleSend} disabled={isSending || !inputValue.trim() || currentStep === 'submitting'} size="icon" className="h-12 w-12 shrink-0" aria-label="메시지 전송">
-            {isSending ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
+          <Button onClick={handleSend} disabled={isSending || !inputValue.trim() || currentStep === 'submitting'} size="icon" className="shrink-0" aria-label="메시지 전송">
+            {isSending ? <Loader2 className="h-6 w-6 animate-spin" /> : <Send className="h-6 w-6" />}
           </Button>
         </div>
-        <p className="text-xs text-muted-foreground mt-2 text-center">
+        <p className="text-sm text-muted-foreground mt-2 text-center">
           Enter 키로 메시지를 전송할 수 있습니다. <CornerDownLeft className="inline h-3 w-3"/>
         </p>
       </footer>
