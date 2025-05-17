@@ -29,12 +29,12 @@ body {
     --secondary: 207 80% 85%; /* Lighter shade of primary for secondary elements */
     --secondary-foreground: 210 40% 15%;
 
-    --accent: 45 100% 65%; /* #FFD54F - Warm yellow */
+    --accent: 205 100% 75%; /* #FFD54F - Warm yellow */
     --accent-foreground: 24 95% 15%; /* Dark brown/black for text on yellow */
 
     --destructive: 0 72% 51%; /* Adjusted destructive to be a bit softer red */
     --destructive-foreground: 0 0% 98%;
-    
+
     --ring: 207 90% 68%; /* Primary color for rings */
     --radius: 0.85rem; /* Increased for rounder elements */
 
@@ -51,7 +51,7 @@ body {
     /* Chart colors - can be adjusted to fit the theme */
     --chart-1: 207 90% 68%; /* primary */
     --chart-2: 45 100% 65%; /* accent */
-    --chart-3: 207 70% 50%; 
+    --chart-3: 207 70% 50%;
     --chart-4: 45 80% 50%;
     --chart-5: 200 80% 60%;
   }
