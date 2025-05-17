@@ -42,7 +42,7 @@ export default function LoginPage() {
           <div className="flex justify-center mb-4">
             <BookHeart className="h-16 w-16 text-primary" />
           </div>
-          <CardTitle className="text-3xl font-bold text-primary">{process.env.NEXT_PUBLIC_APP_NAME || "ReadMe Kids"}</CardTitle>
+          <CardTitle className="text-3xl font-bold text-primary">{process.env.NEXT_PUBLIC_APP_NAME || "아이북"}</CardTitle>
           <CardDescription className="text-md text-muted-foreground">
             우리 아이에게 딱 맞는 책을 찾아보세요!
           </CardDescription>
@@ -75,12 +75,12 @@ export default function LoginPage() {
         </CardContent>
         <CardFooter className="flex justify-center">
           <p className="text-xs text-muted-foreground">
-            계속 진행하시면 ReadMe Kids의 이용약관 및 개인정보처리방침에 동의하는 것으로 간주됩니다.
+            계속 진행하시면 아이북의 이용약관 및 개인정보처리방침에 동의하는 것으로 간주됩니다.
           </p>
         </CardFooter>
       </Card>
       <footer className="mt-8 text-center text-sm text-muted-foreground">
-        &copy; {new Date().getFullYear()} {process.env.NEXT_PUBLIC_APP_NAME || "ReadMe Kids"}. All rights reserved.
+        &copy; {new Date().getFullYear()} {process.env.NEXT_PUBLIC_APP_NAME || "아이북"}. All rights reserved.
       </footer>
     </div>
   );

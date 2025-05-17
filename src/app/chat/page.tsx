@@ -26,7 +26,7 @@ type ConversationStep =
 const initialBotMessage = (step: ConversationStep, name?: string): string => {
   switch (step) {
     case 'awaitingAge':
-      return `안녕하세요${name ? ` ${name}님` : ''}! ReadMe Kids에 오신 것을 환영합니다. 우리 아이에게 딱 맞는 책을 찾아드릴게요. 먼저 아이의 나이를 알려주시겠어요? (예: 7)`;
+      return `안녕하세요${name ? ` ${name}님` : ''}! 아이북에 오신 것을 환영합니다. 우리 아이에게 딱 맞는 책을 찾아드릴게요. 먼저 아이의 나이를 알려주시겠어요? (예: 7)`;
     case 'awaitingInterests':
       return "관심사가 있다면 알려주세요. (예: 공룡, 우주, 공주)";
     case 'awaitingReadingLevel':
@@ -202,7 +202,7 @@ export default function ChatPage() {
         </Button>
         <div className="flex items-center space-x-2">
           <BookHeart className="h-8 w-8 text-primary" />
-          <h1 className="text-xl font-semibold text-primary">{process.env.NEXT_PUBLIC_APP_NAME || "ReadMe Kids"}</h1>
+          <h1 className="text-xl font-semibold text-primary">{process.env.NEXT_PUBLIC_APP_NAME || "아이북"}</h1>
         </div>
         <Button variant="ghost" size="icon" onClick={logout} title="로그아웃">
           <LogOut className="h-5 w-5 text-muted-foreground" />
@@ -248,4 +248,3 @@ export default function ChatPage() {
     </div>
   );
 }
-

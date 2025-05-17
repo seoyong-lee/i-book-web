@@ -12,7 +12,7 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: process.env.NEXT_PUBLIC_APP_NAME || 'ReadMe Kids',
+  title: process.env.NEXT_PUBLIC_APP_NAME || '아이북',
   description: '우리 아이를 위한 맞춤 도서 추천 서비스',
   manifest: '/manifest.json', // For PWA capabilities
   icons: { // Placeholder icons, replace with actual app icons

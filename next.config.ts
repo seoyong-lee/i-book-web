@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
     ],
   },
   env: {
-    NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME || "ReadMe Kids",
+    NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME || "아이북",
     // GOOGLE_API_KEY is used server-side by Genkit, no need to expose it to client
   },
 };
