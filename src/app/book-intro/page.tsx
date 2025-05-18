@@ -40,7 +40,7 @@ export default function BookIntroPage() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="flex flex-col h-fit bg-background">
       <header className="flex items-center justify-between p-4 border-b bg-card shadow-sm sticky top-0 z-10">
         <div className="flex items-center space-x-2">
           <BookHeart className="h-10 w-10 text-primary" />
@@ -66,24 +66,20 @@ export default function BookIntroPage() {
                 data-ai-hint="reading children"
               />
             </div>
-            <CardTitle className="text-3xl md:text-4xl font-bold text-primary">
+            <CardTitle className="text-3xl md:text-4xl font-bold text-primary break-keep">
               {process.env.NEXT_PUBLIC_APP_NAME || "아이북"}에 오신 것을
               환영합니다!
             </CardTitle>
-            <div className="h-1" />
-            <CardDescription className="text-lg md:text-xl text-muted-foreground mt-4 break-keep">
+            <div className="h-[8px]" />
+            <CardDescription className="text-[12px] md:text-xl text-muted-foreground mt-4 break-keep">
               AI가 우리 아이의 연령, 관심사, 독서 수준에 꼭 맞는 책을 추천해
-              드립니다.
-              <br />
-              간단한 대화를 통해 맞춤형 책을 찾아보세요!
+              드립니다. 간단한 대화를 통해 맞춤형 책을 찾아보세요!
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col items-center space-y-6">
-            <p className="text-center text-foreground px-4 mt-2">
-              우리 아이 독서 습관, 아이북과 함께 즐겁게 시작해요!
-              <br />
-              AI 친구와 대화하며 아이에게 딱 맞는 책을 발견하는 재미를
-              느껴보세요.
+            <p className="text-center text-[12px] text-foreground px-4 mt-2">
+              우리 아이 독서 습관, 아이북과 함께 즐겁게 시작해요! AI 친구와
+              대화하며 아이에게 딱 맞는 책을 발견하는 재미를 느껴보세요.
             </p>
             <Button
               size="lg"
@@ -95,8 +91,8 @@ export default function BookIntroPage() {
               <ArrowRight className="ml-2 h-6 w-6" />
             </Button>
           </CardContent>
-          <CardFooter className="flex justify-center mt-4">
-            <p className="text-sm text-muted-foreground">
+          <CardFooter className="flex justify-center mt-2">
+            <p className="text-[12px] text-center text-muted-foreground">
               추천된 책은 AI에 의해 생성되며, 실제 도서 정보와 다를 수 있습니다.
             </p>
           </CardFooter>

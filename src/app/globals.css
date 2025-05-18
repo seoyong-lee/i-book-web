@@ -106,5 +106,6 @@ body {
   body {
     @apply bg-background text-foreground;
     -webkit-tap-highlight-color: transparent; /* Improve mobile tap experience */
+    overscroll-behavior-y: contain;
   }
 }

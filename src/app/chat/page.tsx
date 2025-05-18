@@ -289,7 +289,7 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-background max-w-lg mx-auto border-x border-border/50 shadow-lg">
+    <div className="flex flex-col h-[100dvh] bg-background max-w-lg mx-auto border-x border-border/50 shadow-lg">
       <header className="flex items-center justify-between p-3 border-b bg-card shadow-sm">
         <Button
           variant="ghost"
@@ -310,26 +310,26 @@ export default function ChatPage() {
         </Button>
       </header>
 
-      {isAlertOpen && (
-        <div className="px-3">
-          <Alert
-            variant="default"
-            onClick={onCloseAlert}
-            className="mt-3 rounded-lg border-accent bg-accent/10 shadow-md"
-          >
-            <Info className="h-6 w-6" />
-            <AlertTitle className="font-semibold text-foreground/70 text-lg mt-[-4px]">
-              사용방법
-            </AlertTitle>
-            <AlertDescription className="text-accent-foreground text-base">
-              AI가 아이의 연령, 관심사, 독서 수준에 맞는 책을 추천해 드립니다.
-              대화를 시작해보세요!
-            </AlertDescription>
-          </Alert>
-        </div>
-      )}
-
       <ScrollArea className="flex-grow px-4" ref={scrollAreaRef}>
+        {isAlertOpen && (
+          <div className="px-3">
+            <Alert
+              variant="default"
+              onClick={onCloseAlert}
+              className="mt-3 rounded-lg border-accent bg-accent/10 shadow-md"
+            >
+              <Info className="h-6 w-6" />
+              <AlertTitle className="font-semibold text-foreground/70 text-lg mt-[-4px]">
+                사용방법
+              </AlertTitle>
+              <AlertDescription className="text-accent-foreground text-base">
+                AI가 아이의 연령, 관심사, 독서 수준에 맞는 책을 추천해 드립니다.
+                대화를 시작해보세요!
+              </AlertDescription>
+            </Alert>
+          </div>
+        )}
+
         <div className="space-y-0">
           {messages.map((msg) => (
             <ChatMessage key={msg.id} message={msg} />
