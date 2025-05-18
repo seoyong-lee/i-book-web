@@ -29,9 +29,9 @@ const BookRecommendationCard = ({
 }: {
   recommendation: RecommendBookOutput;
 }) => (
-  <Card className="mt-2 shadow-md bg-card border-primary/50">
-    <CardHeader>
-      <div className="flex items-center space-x-3">
+  <div className="mt-2 bg-card border-primary/50">
+    <div className="mb-4">
+      <div className="flex items-center gap-2">
         <BookOpen className="h-10 w-10 text-primary" />
         <div>
           <CardTitle className="text-2xl text-primary">
@@ -42,8 +42,8 @@ const BookRecommendationCard = ({
           </CardDescription>
         </div>
       </div>
-    </CardHeader>
-    <CardContent>
+    </div>
+    <div>
       <Image
         src={`https://placehold.co/300x200.png?text=${encodeURIComponent(
           recommendation.bookTitle
@@ -54,14 +54,14 @@ const BookRecommendationCard = ({
         className="rounded-md w-full object-cover aspect-[3/2] mb-3"
         data-ai-hint="book cover"
       />
-      <p className="text-base text-foreground leading-relaxed">
+      <p className="text-base text-foreground leading-relaxed mt-4">
         {recommendation.reason}
       </p>
-    </CardContent>
-    <CardFooter className="text-sm text-muted-foreground">
+    </div>
+    <div className="text-sm text-muted-foreground mt-4">
       AI 추천 도서입니다.
-    </CardFooter>
-  </Card>
+    </div>
+  </div>
 );
 
 export function ChatMessage({ message }: ChatMessageProps) {

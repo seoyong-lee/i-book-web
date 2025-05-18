@@ -1,9 +1,14 @@
-
 "use client";
 
-import type { ReactNode } from 'react';
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import type { ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -14,7 +19,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const AUTH_TOKEN_KEY = '아이북_auth_token';
+const AUTH_TOKEN_KEY = "아이북_auth_token";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -35,23 +40,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated && pathname === '/chat') {
-      router.push('/login');
-    }
-    if (!isLoading && isAuthenticated && pathname === '/login') {
-      router.push('/chat');
+    if (!isLoading) {
+      if (
+        !isAuthenticated &&
+        (pathname === "/chat" || pathname === "/book-intro")
+      ) {
+        router.push("/login");
+      }
+      if (isAuthenticated && pathname === "/login") {
+        router.push("/book-intro");
+      }
     }
   }, [isAuthenticated, isLoading, router, pathname]);
 
-  const login = useCallback((token: string = 'dummy_token') => {
-    try {
-      localStorage.setItem(AUTH_TOKEN_KEY, token);
-    } catch (error) {
-      console.error("Error accessing localStorage:", error);
-    }
-    setIsAuthenticated(true);
-    router.push('/chat');
-  }, [router]);
+  const login = useCallback(
+    (token: string = "dummy_token") => {
+      try {
+        localStorage.setItem(AUTH_TOKEN_KEY, token);
+      } catch (error) {
+        console.error("Error accessing localStorage:", error);
+      }
+      setIsAuthenticated(true);
+      router.push("/book-intro");
+    },
+    [router]
+  );
 
   const logout = useCallback(() => {
     try {
@@ -60,7 +73,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.error("Error accessing localStorage:", error);
     }
     setIsAuthenticated(false);
-    router.push('/login');
+    router.push("/login");
   }, [router]);
 
   return (
@@ -73,8 +86,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 }
-

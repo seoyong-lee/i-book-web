@@ -64,6 +64,8 @@ export default function ChatPage() {
     useState<ConversationStep>("awaitingAge");
   const [formData, setFormData] = useState<Partial<RecommendBookInput>>({});
 
+  const [isAlertOpen, setIsAlertOpen] = useState(true);
+
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const didInit = useRef(false);
@@ -274,6 +276,10 @@ export default function ChatPage() {
     }
   };
 
+  const onCloseAlert = () => {
+    setIsAlertOpen(false);
+  };
+
   if (authIsLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-background p-4">
@@ -304,21 +310,24 @@ export default function ChatPage() {
         </Button>
       </header>
 
-      <div className="px-3">
-        <Alert
-          variant="default"
-          className="mt-3 rounded-lg border-accent bg-accent/10 shadow-md"
-        >
-          <Info className="h-6 w-6" />
-          <AlertTitle className="font-semibold text-foreground/70 text-lg mt-[-4px]">
-            사용방법
-          </AlertTitle>
-          <AlertDescription className="text-accent-foreground text-base">
-            AI가 아이의 연령, 관심사, 독서 수준에 맞는 책을 추천해 드립니다.
-            대화를 시작해보세요!
-          </AlertDescription>
-        </Alert>
-      </div>
+      {isAlertOpen && (
+        <div className="px-3">
+          <Alert
+            variant="default"
+            onClick={onCloseAlert}
+            className="mt-3 rounded-lg border-accent bg-accent/10 shadow-md"
+          >
+            <Info className="h-6 w-6" />
+            <AlertTitle className="font-semibold text-foreground/70 text-lg mt-[-4px]">
+              사용방법
+            </AlertTitle>
+            <AlertDescription className="text-accent-foreground text-base">
+              AI가 아이의 연령, 관심사, 독서 수준에 맞는 책을 추천해 드립니다.
+              대화를 시작해보세요!
+            </AlertDescription>
+          </Alert>
+        </div>
+      )}
 
       <ScrollArea className="flex-grow px-4" ref={scrollAreaRef}>
         <div className="space-y-0">
