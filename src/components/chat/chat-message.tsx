@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export interface Message {
   id: string;
@@ -30,10 +30,34 @@ const BookRecommendationCard = ({
 }: {
   recommendation: RecommendBookOutput;
 }) => {
-  const PLACEHOLDER_IMG = `https://placehold.co/300x200.png?text=${recommendation.bookTitle}`;
-  const [imgSrc, setImgSrc] = useState(
-    recommendation.imageUrl || PLACEHOLDER_IMG
-  );
+  const PLACEHOLDER_IMG = `https://placehold.co/300x200.png?text=${encodeURIComponent(
+    recommendation.bookTitle
+  )}`;
+  const [imgSrc, setImgSrc] = useState(PLACEHOLDER_IMG);
+
+  // Google Books API로 이미지 보완
+  useEffect(() => {
+    const fetchImageFromGoogleBooks = async (title: string) => {
+      try {
+        const res = await fetch(
+          `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(
+            title
+          )}&langRestrict=ko`
+        );
+        const data = await res.json();
+        const googleImg = data.items?.[0]?.volumeInfo?.imageLinks?.thumbnail;
+        if (googleImg) {
+          setImgSrc(googleImg);
+        } else {
+          setImgSrc(PLACEHOLDER_IMG);
+        }
+      } catch (e) {
+        setImgSrc(PLACEHOLDER_IMG);
+      }
+    };
+
+    fetchImageFromGoogleBooks(recommendation.bookTitle);
+  }, [recommendation.bookTitle]);
 
   return (
     <div className="mt-2 bg-card border-primary/50">
@@ -56,7 +80,7 @@ const BookRecommendationCard = ({
           alt={recommendation.bookTitle}
           width={300}
           height={200}
-          className="rounded-md w-full object-cover aspect-[3/2] mb-3"
+          className="rounded-md w-full object-contain aspect-[3/2] mb-3"
           loading="lazy"
           onError={() => setImgSrc(PLACEHOLDER_IMG)}
         />
