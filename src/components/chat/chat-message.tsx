@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Image from "next/image";
+import { useState } from "react";
 
 export interface Message {
   id: string;
@@ -28,41 +29,47 @@ const BookRecommendationCard = ({
   recommendation,
 }: {
   recommendation: RecommendBookOutput;
-}) => (
-  <div className="mt-2 bg-card border-primary/50">
-    <div className="mb-4">
-      <div className="flex items-center gap-2">
-        <BookOpen className="h-10 w-10 text-primary" />
-        <div>
-          <CardTitle className="text-2xl text-primary">
-            {recommendation.bookTitle}
-          </CardTitle>
-          <CardDescription className="text-base text-muted-foreground">
-            작가: {recommendation.author}
-          </CardDescription>
+}) => {
+  const PLACEHOLDER_IMG = `https://placehold.co/300x200.png?text=${recommendation.bookTitle}`;
+  const [imgSrc, setImgSrc] = useState(
+    recommendation.imageUrl || PLACEHOLDER_IMG
+  );
+
+  return (
+    <div className="mt-2 bg-card border-primary/50">
+      <div className="mb-4">
+        <div className="flex gap-2">
+          <BookOpen className="h-10 w-10 text-primary" />
+          <div>
+            <CardTitle className="text-2xl text-primary">
+              {recommendation.bookTitle}
+            </CardTitle>
+            <CardDescription className="text-base text-muted-foreground">
+              작가: {recommendation.author}
+            </CardDescription>
+          </div>
         </div>
       </div>
+      <div>
+        <img
+          src={imgSrc}
+          alt={recommendation.bookTitle}
+          width={300}
+          height={200}
+          className="rounded-md w-full object-cover aspect-[3/2] mb-3"
+          loading="lazy"
+          onError={() => setImgSrc(PLACEHOLDER_IMG)}
+        />
+        <p className="text-base text-foreground leading-relaxed mt-4">
+          {recommendation.reason}
+        </p>
+      </div>
+      <div className="text-sm text-muted-foreground mt-4">
+        AI 추천 도서입니다.
+      </div>
     </div>
-    <div>
-      <Image
-        src={`https://placehold.co/300x200.png?text=${encodeURIComponent(
-          recommendation.bookTitle
-        )}`}
-        alt={recommendation.bookTitle}
-        width={300}
-        height={200}
-        className="rounded-md w-full object-cover aspect-[3/2] mb-3"
-        data-ai-hint="book cover"
-      />
-      <p className="text-base text-foreground leading-relaxed mt-4">
-        {recommendation.reason}
-      </p>
-    </div>
-    <div className="text-sm text-muted-foreground mt-4">
-      AI 추천 도서입니다.
-    </div>
-  </div>
-);
+  );
+};
 
 export function ChatMessage({ message }: ChatMessageProps) {
   const isUser = message.sender === "user";
