@@ -192,11 +192,8 @@ export default function ChatPage() {
                 : msg
             )
           );
-          addMessage(
-            "bot",
-            "다른 책을 추천받고 싶으시면 '새로운 추천'이라고 입력해주세요."
-          );
-          setCurrentStep("idle");
+
+          setCurrentStep("awaitingAge");
           setFormData({});
         } catch (error) {
           console.error("Error getting recommendation:", error);
