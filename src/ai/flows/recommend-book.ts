@@ -10,6 +10,7 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import { responseMock } from '@/app/mocks/response.mock';
 
 const RecommendBookInputSchema = z.object({
   age: z.number().describe('The age of the child.'),
@@ -19,53 +20,41 @@ const RecommendBookInputSchema = z.object({
 });
 export type RecommendBookInput = z.infer<typeof RecommendBookInputSchema>;
 
-const RecommendBookOutputSchema = z.object({
-  bookTitle: z.string().describe('The title of the recommended book.'),
+const BookSchema = z.object({
+  title: z.string().describe('The title of the recommended book.'),
   author: z.string().describe('The author of the recommended book.'),
   reason: z.string().describe('Why this book is recommended for the child.'),
+  cover: z.string().optional().describe('The cover image URL of the book.'),
+  publisher: z.string().optional().describe('The publisher of the book.'),
+  pubDate: z.string().optional().describe('The publication date of the book.'),
+  isbn13: z.string().optional().describe('The ISBN13 of the book.'),
+  priceSales: z.number().optional().describe('The sales price of the book.'),
+  link: z.string().optional().describe('The link to the book details.'),
+});
+
+const RecommendBookOutputSchema = z.object({
+  books: z.array(BookSchema).describe('Array of recommended books.'),
+  totalCount: z.number().describe('Total number of recommended books.'),
 });
 export type RecommendBookOutput = z.infer<typeof RecommendBookOutputSchema>;
+export type Book = z.infer<typeof BookSchema>;
 
 export async function recommendBook(input: RecommendBookInput): Promise<RecommendBookOutput> {
-  return recommendBookFlow(input);
+  // Mock 데이터를 사용하여 책 추천 시뮬레이션
+  const mockBooks = responseMock.map((book, index) => ({
+    title: `${input.interests}와 관련된 책 ${index + 1}`,
+    author: `작가 ${index + 1}`,
+    reason: `${input.age}세 아이에게 ${input.interests}에 대한 흥미를 키워줄 수 있는 ${input.readingLevel} 수준의 책입니다. 아이의 상상력과 창의력을 기를 수 있는 내용으로 구성되어 있습니다.`,
+    cover: book.cover,
+    publisher: book.publisher,
+    pubDate: book.pubDate,
+    isbn13: book.isbn13,
+    priceSales: book.priceSales,
+    link: book.link,
+  }));
+
+  return {
+    books: mockBooks,
+    totalCount: mockBooks.length,
+  };
 }
-
-const prompt = ai.definePrompt({
-  name: 'recommendBookPrompt',
-  input: { schema: RecommendBookInputSchema },
-  output: { schema: RecommendBookOutputSchema },
-  prompt: `
-You are a helpful chatbot that recommends books for children. The user will provide the child's age, interests, and reading level.
-
-{% if previousBooks %}
-The child has previously read the following books: {{previousBooks}}
-{% endif %}
-
-Recommend a Korean children's book that matches the child's profile.
-**All fields in your answer (title, author, description) must be written ONLY in Korean. Do not use English, Russian, or other foreign words. Only use Korean.**
-Provide the following details in your answer **in JSON format**:
-
-- title: book title in Korean
-- author: author name in Korean
-- description: a short description in Korean
-
-If you cannot find a suitable book, respond with a message in Korean saying that you could not find a suitable book.
-
-Child profile:
-- Age: {{{age}}}
-- Interests: {{{interests}}}
-- Reading Level: {{{readingLevel}}}
-  `,
-});
-
-const recommendBookFlow = ai.defineFlow(
-  {
-    name: 'recommendBookFlow',
-    inputSchema: RecommendBookInputSchema,
-    outputSchema: RecommendBookOutputSchema,
-  },
-  async input => {
-    const {output} = await prompt(input);
-    return output!;
-  }
-);
